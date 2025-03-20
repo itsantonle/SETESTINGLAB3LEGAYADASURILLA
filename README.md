@@ -1,8 +1,8 @@
-# ORIGINALLY DEVELOPED BY
+# Originally developed by
 
 HasancanCakicioglu @ Github.com
 
-# NOTES
+# Notes
 
 Used for testing by Legayada, Surilla only for academic purposes and not for profit. Under the MIT License. This program is a BACKEND Application and has no FrontEnd, all testing done is mainly for the Backend using Supertest and Jest
 
@@ -58,6 +58,8 @@ npm run dev
 ```
 
 6. Use thunderclient or Postman to send example your own requests
+
+# Testing
 
 7. Run the test suite (NOT WORKING RN)
 
