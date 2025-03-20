@@ -9,6 +9,11 @@ Used for testing by Legayada, Surilla only for academic purposes and not for pro
 # Installation
 
 1. Clone the repository
+
+```bash
+git clone https://github.com/itsantonle/SETESTINGLAB3LEGAYADASURILLA.git
+```
+
 2. Set up the environment variables (sample .env below)
 
 by default the server runs on localhost://3009
@@ -58,6 +63,17 @@ npm run dev
 ```
 
 6. Use thunderclient or Postman to send example your own requests
+
+Example POST REQUEST TO /api/auth/signup
+not filling out all the fields will trigger the validation middleware to send a 400 Bad Request
+
+```js
+{
+   "username": "TestUser",
+   "email": "testuser@test.com",
+   "password": "testpassword"
+}
+```
 
 # Testing
 
