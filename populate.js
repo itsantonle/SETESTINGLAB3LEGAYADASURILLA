@@ -1,20 +1,24 @@
-import connectMongoDB from './config/mongoose'
 import User from './models/user.model'
 import { usersMock } from './userMockData'
+import dotenv from 'dotenv'
+dotenv.config()
 
-const start = async () => {
+export const populateWithMock = async () => {
   try {
-    await connectMongoDB()
-    // deletes all instance of users in the db if there is
+    if (process.env.NODE_ENV != 'test') {
+      throw Error('Not in testing environment')
+    }
+    // always call delete in order to clear instances
     await User.deleteMany()
     const users = await User.create(usersMock)
-    //node has a process called exit
-    //process.exit(0) everythign went well
-    console.log('success', users)
-    process.exit(0)
+
+    if (users.length === 0) {
+      throw new Error('Unable to populate')
+    } else {
+      // console.log('success', users)
+      return users
+    }
   } catch (err) {
-    console.log(err)
-    process.exit(1)
+    console.error('Error in populate.js', err)
   }
 }
-start()

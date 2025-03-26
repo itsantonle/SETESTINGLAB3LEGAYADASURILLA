@@ -5,10 +5,10 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon api/index.js",
-    "start": "node api/index.js",
+    "dev": "cross-env NODE_ENV=test nodemon api/index.js",
+    "start": "cross-env NODE_ENV=production node api/index.js",
     "build": "npm install && npm install --prefix client && npm run build --prefix client",
-    "test:ST": "npx jest"
+    "test:ST": "cross-env NODE_ENV=test npx jest"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +29,7 @@
     "@babel/core": "^7.26.10",
     "@babel/preset-env": "^7.26.9",
     "babel-jest": "^29.7.0",
+    "cross-env": "^7.0.3",
     "jest": "^29.7.0",
     "supertest": "^7.0.0"
   }
