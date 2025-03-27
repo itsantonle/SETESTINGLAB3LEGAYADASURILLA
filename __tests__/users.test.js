@@ -127,7 +127,7 @@ describe('TESTS FOR NON-PROTECTED ROUTES', () => {
         const response = await request.post(signupRoute).send(testUser)
         expect(response.statusCode).toBe(500)
         expect(response.body.message).toBe(
-          'E11000 duplicate key error collection: PRODSELAB.users index: username_1 dup key: { username: "TestUser" }'
+          'E11000 duplicate key error collection: TESTSELAB.users index: username_1 dup key: { username: "TestUser" }'
         )
       })
     })

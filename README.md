@@ -1,10 +1,37 @@
 # Originally developed by
 
 HasancanCakicioglu @ Github.com
+the original repository link:
+https://github.com/HasancanCakicioglu/mern-auth-backend.git
 
 # Notes
 
-Used for testing by Legayada, Surilla only for academic purposes and not for profit. Under the MIT License. This program is a BACKEND Application and has no FrontEnd, all testing done is mainly for the Backend using Supertest and Jest
+Used for testing by Legayada, Surilla only for academic purposes and not for profit. Under the MIT License. This program is a BACKEND Application and has no FrontEnd, all testing done is mainly for the Backend using Supertest and Jest.
+
+# Prerequisites:
+
+please have mongodb shell installed on your device:
+
+MongoDB Community Server
+This is the core software needed to set up and run MongoDB databases locally.
+
+Installation Steps:
+
+1. Download MongoDB Community Server from the MongoDB Downloads Page.
+
+2. Choose the correct version for your operating system (Windows, macOS, or Linux).
+
+3. Follow the installation guide provided for your operating system.
+
+Once installed, MongoDB will run as a service or daemon, and the default connection URI will be mongodb://localhost:27017.
+
+if you don't have the shell:
+install it from here:
+https://www.mongodb.com/try/download/shell
+
+```cmd
+mongosh --version
+```
 
 # Installation
 
@@ -19,14 +46,24 @@ git clone https://github.com/itsantonle/SETESTINGLAB3LEGAYADASURILLA.git
 by default the server runs on localhost://3009
 
 ```txt
- MONGODB_URI=
- JWT_SECRET=
- PORT=
+TEST_MONGODB_URI=
+PROD_MONGODB_URI=
+JWT_SECRET=
+PORT=
+```
+
+example .env
+
+```bash
+TEST_MONGODB_URI=mongodb://localhost:27017/
+PROD_MONGODB_URI=mongodb://localhost:27017/
+JWT_SECRET=<GENERATED>
+PORT=3008
 ```
 
 3. Get a MongoDB URI:
 
-Local (via bash)
+Local (via bash or cmd)
 
 start the mongodb service (automatic if installed)
 
@@ -54,30 +91,106 @@ Copy your URI to your .env file
 4. The JWT Secret can be generated or you can just write it(NOT RECOMMENDED)
    [GENERATE JWT SECRET](https://jwtsecret.com/generate)
 
-5. Run the server
+5. Run the tests
 
 listens to port 3009 by default
 
 ```bash
-npm run dev
+npm run test
 ```
 
-6. Use thunderclient or Postman to send example your own requests
+6. See the DB on MongoDBCompass
+   <img src = './imgs/ShowchangesMDBCompass.png'>
 
-Example POST REQUEST TO /api/auth/signup
-not filling out all the fields will trigger the validation middleware to send a 400 Bad Request
+Local (via Mongosh - MongoDBShell) 7. all dbs run by
 
-```js
-{
-   "username": "TestUser",
-   "email": "testuser@test.com",
-   "password": "testpassword"
-}
+```bash
+mongodb://localhost:27017/
 ```
+
+8. MongoDB creates a database if it doesn't already exist
+
+this creates a db called 'testDB'
+
+```bash
+Mongo_URI = mongodb://localhost:27017/testDB
+```
+
+9. example .env
+
+```bash
+TEST_MONGODB_URI=mongodb://localhost:27017/testDB
+PROD_MONGODB_URI=mongodb://localhost:27017/ProdDB
+JWT_SECRET=<GENERATED>
+PORT=3008
+```
+
+10. Navigate to cmd or any terminal and run mongosh
+
+```bash
+mongosh
+```
+
+then once inside the shell enter:
+
+```bash
+show dbs
+```
+
+to navigate inside your db:
+
+```bash
+use <dbname>
+```
+
+to check the users collection that the tests automatically made in the db:
+navigate to the db
+
+```bash
+use <dbname>
+```
+
+show the collections - you should see the users collection
+
+```bash
+show collections
+```
+
+while inside your db - type the command to check if the contents of that collection
+
+```bash
+db.users.find()
+```
+
+it should return nothing if the clean up test is ran
 
 # Testing
 
-7. Run the test suite (NOT WORKING RN)
+The testing commands are found in package.json scripts
+
+```js
+"scripts": {
+    "dev": "cross-env NODE_ENV=test nodemon api/index.js",
+    "start": "cross-env NODE_ENV=production node api/index.js",
+    "build": "npm install && npm install --prefix client && npm run build --prefix client",
+    "test": "cross-env NODE_ENV=test npx jest",
+    "test:watch": "npm test -- --watch"
+  }
+```
+
+1. to run test suite (runs only once using the test db)
+
+```bash
+npm run test
+```
+
+2. The test suite will only ever run on the test db and never the production db
+
+# THe tests file are ran inside the **_tests_** folder
+
+```bash
+users.test.js
+```
 
 # MERN Authentication Backend Project
 
@@ -99,61 +212,6 @@ This project is a nodejs backend built for MERN (MongoDB, Express.js, React.js, 
 - Node.js: A JavaScript runtime environment for executing server-side code.
 - JWT (JSON Web Tokens): A compact, URL-safe means of representing claims to be transferred between two parties.
 - bcrypt.js: A library to help hash passwords securely.
-
-## Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/HasancanCakicioglu/mern-auth-backend.git
-   ```
-
-2. Navigate to the project directory:
-
-   ```bash
-   cd mern-auth-backend
-   ```
-
-3. Install dependencies for the backend:
-
-   ```bash
-   npm install
-   ```
-
-4. Set up environment variables:
-
-   - Create a `.env` file in the root directory.
-   - Define the following environment variables:
-     ```
-     MONGODB_URI=<your_mongodb_uri>
-     JWT_SECRET=<your_jwt_secret>
-     PORT=<your_port>
-     ```
-
-5. Start the development server:
-
-   ```bash
-   npm run dev
-   ```
-
-6. Access the application in your browser at `http://localhost:3000`.
-
-## Usage
-
-- Register a new user by providing a username, email, and password.
-- Sign in with your registered email and password to access protected routes.
-- After signing in, you'll receive a JWT token, which you can use to access protected routes.
-- Access protected routes by including the JWT token in the request headers (e.g., `Authorization: Bearer <token>`).
-
-## Contributing
-
-Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/my-feature`).
-3. Make your changes and commit them (`git commit -am 'Add new feature'`).
-4. Push to the branch (`git push origin feature/my-feature`).
-5. Create a new pull request.
 
 ## License
 
