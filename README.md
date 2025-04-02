@@ -32,9 +32,12 @@ https://www.mongodb.com/try/download/shell
 ```cmd
 mongosh --version
 ```
+
+or check that the MongoDB service is running in servinces (Windows)
+
 # Full Installation Guide
 
-``` view link here:
+````view link here:
 https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/#std-label-install-mdb-community-windows
 
 # Installation
@@ -43,7 +46,7 @@ https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/#std-lab
 
 ```bash
 git clone https://github.com/itsantonle/SETESTINGLAB3LEGAYADASURILLA.git
-```
+````
 
 2. Set up the environment variables (sample .env below)
 
@@ -59,8 +62,8 @@ PORT=
 example .env
 
 ```bash
-TEST_MONGODB_URI=mongodb://localhost:27017/
-PROD_MONGODB_URI=mongodb://localhost:27017/
+TEST_MONGODB_URI=mongodb://localhost:27017/testdb
+PROD_MONGODB_URI=mongodb://localhost:27017/proddb
 JWT_SECRET=<GENERATED>
 PORT=3008
 ```
