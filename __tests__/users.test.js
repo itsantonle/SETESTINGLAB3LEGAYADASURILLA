@@ -5,6 +5,8 @@ import { cleanUpMock } from '../cleanupMock'
 import { populateWithMock } from '../populate'
 import User from '../models/user.model'
 import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+dotenv.config()
 
 // ROUTES
 const signupRoute = '/api/auth/signup'
@@ -124,10 +126,12 @@ describe('TESTS FOR NON-PROTECTED ROUTES', () => {
         expect(response.body.validation[0].path).toBe('password')
       })
       test('should return a 500 internal server error when trying to create duplicate user', async () => {
+        const uri = process.env.TEST_MONGODB_URI
+        const dBNAme = uri.split('/').pop();
         const response = await request.post(signupRoute).send(testUser)
         expect(response.statusCode).toBe(500)
         expect(response.body.message).toBe(
-          'E11000 duplicate key error collection: TESTSELAB.users index: username_1 dup key: { username: "TestUser" }'
+          `E11000 duplicate key error collection: ${dBNAme}.users index: username_1 dup key: { username: "TestUser" }`
         )
       })
     })

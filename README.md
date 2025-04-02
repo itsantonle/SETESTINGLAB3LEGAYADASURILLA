@@ -32,6 +32,10 @@ https://www.mongodb.com/try/download/shell
 ```cmd
 mongosh --version
 ```
+# Full Installation Guide
+
+``` view link here:
+https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/#std-label-install-mdb-community-windows
 
 # Installation
 
